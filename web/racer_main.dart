@@ -11,6 +11,5 @@ part 'background.dart';
 
 
 main() {
-  new Board(document.querySelector('#canvas'));
-  
+  CanvasElement canvas = querySelector('#canvas');
 }
