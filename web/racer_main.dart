@@ -10,6 +10,8 @@ part 'background.dart';
 
 
 
-main() {
-  CanvasElement canvas = querySelector('#canvas');
+void main() {
+  //get a reference to the canvas
+  CanvasElement canvas = document.querySelector('#canvas');
+  Board board = new Board(canvas);
 }

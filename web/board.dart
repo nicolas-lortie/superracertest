@@ -1,58 +1,60 @@
 part of super_racer;
 
 class Board {
-  int x = 0;
-  int y = 0;
-  int width;
-  int height;
-  Threes three1;
-  Threes three2;
-  Threes three3;
-  Threes three4;
+  //Player starting position
+  static const num START_X = 500;
+  static const num START_Y = 150;
+
+  //Using time to redraw board 
+  Timer timer;
+
+  CanvasElement canvas;
   CanvasRenderingContext2D context;
+  
+  //Board size (using width and height to fit canvas size)
+  num width;
+  num height;
 
-
-  Board(CanvasElement canvas) {
-    context = canvas.getContext('2d');
+  num dx = 2;
+  num dy = 4;
+  
+  //Elements to draw (need to add background and trees)
+  RaceCar racecar;
+  
+  
+  Board(this.canvas) {
+    context = canvas.getContext("2d");
     width = canvas.width;
-    height = canvas.height;
-    three1= new Threes (this, 150, -120, 70, 100);
-    three2= new Threes (this, 370, -110, 70, 120);
-    three3= new Threes (this, 580, -120, 70, 100);
-    three4= new Threes (this, 710, -110, 75, 110);
-    border();
-    window.animationFrame.then(gameLoop);
+    height = canvas.height; 
+    
+    querySelector('#play').onClick.listen((e) {
+      init();
+    });
+  }
 
+  //Initial 'Draw'
+  void init() {
+    racecar = new RaceCar(this, START_X, START_Y);
+    // redraw every 10 ms
+    timer = new Timer.periodic(const Duration(milliseconds: 1),
+        // 't' to call back timer to redraw board every duration
+        (t) => redraw());
+  }
+
+  // Using clear to ensure every element is erased from the canvas before redraw
+  void clear() {
+    context.clearRect(0, 0, width, height);
   }
   
-    gameLoop(num delta) {
-      draw();
-      window.animationFrame.then(gameLoop);
-    }
-
-    border() {
-      context.beginPath();
-      context.fillStyle = 'lightBlue';
-      context.rect(x, y, width, height);
-      context.fillRect(x, y, width, height);
-      context.closePath();
-      context.stroke();
-    }
-
-    clear() {
-      context.clearRect(x, y, width, height);
-      border();
-    }
-
   
-  
-  draw() {
- 
-      three1.draw();
-      three2.draw();
-      three3.draw();
-      three4.draw();
-      
+  void redraw() {
+    clear();
+    racecar.draw();
+    // Drawing the car to it's new position on the board 
+    if (racecar.rightDown) { racecar.carPositionX += 1;
+    } else if (racecar.leftDown) {racecar.carPositionX -= 1;
+    } else if (racecar.backDown) {racecar.carPositionY += 1;
+    } else if (racecar.frontDown) racecar.carPositionY -= 1;
+    racecar.draw();
   }
 }
-
