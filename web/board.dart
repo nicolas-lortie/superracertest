@@ -52,9 +52,13 @@ class Board {
     racecar.draw();
     // Drawing the car to it's new position on the board 
     if (racecar.backDown) {racecar.carPositionY += 0.5;
-    } else if (racecar.frontDown) {racecar.carPositionY -= 0.5; 
-    } else if (racecar.rightDown) { racecar.carPositionX += 0.5;
-    } else if (racecar.leftDown) racecar.carPositionX -= 0.5;
+    }
+    if (racecar.frontDown) {racecar.carPositionY -= 0.5; 
+    }
+    if (racecar.rightDown) { racecar.carPositionX += 0.5;
+    }
+    if (racecar.leftDown) {racecar.carPositionX -= 0.5;
+    }
     racecar.draw();
   }
 }
