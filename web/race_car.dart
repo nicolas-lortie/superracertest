@@ -1,6 +1,5 @@
 part of super_racer;
 
-
 class RaceCar {
   Board board;
   
@@ -16,13 +15,11 @@ class RaceCar {
   
   //Car Image
   var img = document.getElementById('luigi');
-  
   RaceCar(this.board, this.carPositionX, this.carPositionY) {
     draw();
     document.onKeyDown.listen(_onKeyDown);
     document.onKeyUp.listen(_onKeyUp);
   }
-
   
   void draw() {
     board.context.beginPath();
@@ -30,8 +27,8 @@ class RaceCar {
     board.context.closePath();
     board.context.fill();
   }
-
-  //Change rightDown, leftDown Bool if matching arrow keys are pressed (NEED TO ADD FRONT AND BACK)
+  
+//Change rightDown, leftDown Bool if matching arrow keys are pressed (NEED TO ADD FRONT AND BACK)
   _onKeyDown(event) {
     if (event.keyCode == 39) {
       rightDown = true;
@@ -45,7 +42,7 @@ class RaceCar {
     else if (event.keyCode == 38) {
       frontDown = true;
     }
-    // If player uses keys : w,a,s and d to control his car 
+// If player uses keys : w,a,s and d to control his car
     else if (event.keyCode == 68) {
       rightDown = true;
     }
@@ -59,9 +56,8 @@ class RaceCar {
       frontDown = true;
     }
   }
-
-
-  //Changes back if arrow keys are not pressed 
+  
+//Changes back if arrow keys are not pressed
   _onKeyUp(event) {
     if (event.keyCode == 39) {
       rightDown = false;
@@ -75,7 +71,7 @@ class RaceCar {
     else if (event.keyCode == 38) {
       frontDown = false;
     }
-    // If player uses keys : w,a,s and d to control his car 
+// If player uses keys : w,a,s and d to control his car
     else if (event.keyCode == 68) {
       rightDown = false;
     }
@@ -89,5 +85,6 @@ class RaceCar {
       frontDown = false;
     }
   }
-
 }
+ 
+
