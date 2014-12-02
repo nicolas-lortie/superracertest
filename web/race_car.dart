@@ -3,18 +3,29 @@ part of super_racer;
 class RaceCar {
   Board board;
   
+  //Car size
+  num carWidth = 10;
+  num carHeight = 10;
+  
   //Car's position on the map
   num carPositionX;
   num carPositionY;
   
-  //Bool to use arrow key to control car
+  //Boolean to use arrow key to control car
   bool rightDown = false;
   bool leftDown = false;
   bool backDown = false;
   bool frontDown = false;
   
+  //Boolean to indicate car collision
+  bool canMoveLeft = false;
+  bool canMoveRight = false;
+  bool canMoveFront = false; 
+  bool canMoveBack = false;
+  
   //Car Image
   var img = document.getElementById('luigi');
+  
   RaceCar(this.board, this.carPositionX, this.carPositionY) {
     draw();
     document.onKeyDown.listen(_turnLeft);
@@ -26,7 +37,7 @@ class RaceCar {
   
   void draw() {
     board.context.beginPath();
-    board.context.rect(carPositionX, carPositionY, 10, 10);
+    board.context.rect(carPositionX, carPositionY, carWidth, carHeight);
     board.context.closePath();
     board.context.fill();
   }
