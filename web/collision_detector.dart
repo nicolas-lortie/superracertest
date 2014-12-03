@@ -4,7 +4,7 @@ part of super_racer;
 
 
 class Collision {
-  
+
   //Collision rectangles
   var rect1 = {'x': 84, 'y': 80, 'width': 52, 'height': 216};
   var rect2 = {'x': 68, 'y': 216, 'width': 20, 'height': 56};
@@ -17,14 +17,11 @@ class Collision {
   //Collision to the right, left, up or down
   bool left = false;
   bool right = false;
-  bool up = false; 
+  bool up = false;
   bool down = false;
-  
-  
-  
-  
-  
-}
+
+
+
 
 if (rect1.x < rect2.x + rect2.width &&
    rect1.x + rect1.width > rect2.x &&
@@ -41,12 +38,13 @@ if (5 < 30 &&
     55 > 10) {
     // collision detected!
 }
+}
 
 superRacer() {
 
   Map racingTrack = {
     'texture': 'media/map_1.png',
-    'width': 512,  
+    'width': 512,
     'height': 512,
     'collision': [
 
@@ -77,6 +75,6 @@ superRacer() {
       [405, 451],
       [462, 414]
     ]};
-   
-  
+
+
 }
