@@ -1,6 +1,10 @@
 part of super_racer;
 
 class Board {
+  // var to allow customization of gameplay
+  num speed = 1;
+  var collisionImpact = 5;
+  
   //Player starting position
   static const num START_X = 473;
   static const num START_Y = 356;
@@ -105,7 +109,9 @@ class Board {
        collisions.elementAt(6)['y'] < racecar.carPositionY + racecar.carHeight &&
        collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] > racecar.carPositionY ||
        racecar.carPositionX >= 498) {
-         canMoveRight = false; 
+         canMoveRight = false; {racecar.carPositionX -= collisionImpact; 
+         }
+         racecar.draw();
        } else if (racecar.carPositionX < 498) { 
          canMoveRight = true; 
        }
@@ -140,7 +146,9 @@ class Board {
           collisions.elementAt(6)['y'] < racecar.carPositionY + racecar.carHeight &&
           collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] > racecar.carPositionY ||
           racecar.carPositionX <= 4) {
-            canMoveLeft = false; 
+            canMoveLeft = false; {racecar.carPositionX += collisionImpact; 
+            }
+            racecar.draw();
           } else if (racecar.carPositionX > 4) { 
             canMoveLeft = true; 
           }
@@ -176,7 +184,9 @@ class Board {
              collisions.elementAt(6)['y'] < racecar.carPositionY + racecar.carHeight &&
              collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] >= racecar.carPositionY ||
              racecar.carPositionY <= 4) {
-               canMoveFront = false; 
+               canMoveFront = false; {racecar.carPositionY += collisionImpact; 
+               }
+               racecar.draw();
              } else if (racecar.carPositionY > 4) { 
                canMoveFront = true; 
              }
@@ -211,19 +221,23 @@ class Board {
                 collisions.elementAt(6)['y'] <= racecar.carPositionY + racecar.carHeight &&
                 collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] > racecar.carPositionY ||
                 racecar.carPositionY >= 498) {
-                  canMoveBack = false; 
+                  canMoveBack = false; {racecar.carPositionY -= collisionImpact;
+                  }
+                  racecar.draw();
                 } else if (racecar.carPositionY < 498) { 
                   canMoveBack = true; 
-                }             
+                }   
+                
+                
        
     // Drawing the car to it's new position on the board 
-    if (racecar.backDown && canMoveBack) {racecar.carPositionY += 1;
+    if (racecar.backDown && canMoveBack) {racecar.carPositionY += speed;
     }
-    if (racecar.frontDown && canMoveFront) {racecar.carPositionY -= 1; 
+    if (racecar.frontDown && canMoveFront) {racecar.carPositionY -= speed; 
     }
-    if (racecar.rightDown && canMoveRight) { racecar.carPositionX += 1;
+    if (racecar.rightDown && canMoveRight) { racecar.carPositionX += speed;
     }
-    if (racecar.leftDown && canMoveLeft) {racecar.carPositionX -= 1;
+    if (racecar.leftDown && canMoveLeft) {racecar.carPositionX -= speed;
     }
     racecar.draw();
   }
