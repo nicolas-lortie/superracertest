@@ -3,6 +3,8 @@ part of super_racer;
 class RaceCar {
   Board board;
   
+  num speed = 1;
+  var collisionImpact = 5;
   
   
   //Car size

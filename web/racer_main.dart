@@ -18,7 +18,7 @@ void main() {
   //get a reference to the canvas
   CanvasElement canvas = document.querySelector('#canvas');
   Board board = new Board(canvas);
-
+  
   var resourceManager = new ResourceManager();
   resourceManager.addSound("map", "media/map1.mp3");
   resourceManager.load().then((_) {
