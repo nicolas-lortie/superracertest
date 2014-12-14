@@ -15,11 +15,14 @@ class Board {
   CanvasElement canvas;
   CanvasRenderingContext2D context;
   
+  
   //Board size (using width and height to fit canvas size)
   num width;
   num height;
   
   //Elements to draw (need to add background and trees)
+  var mapImg;
+  
   RaceCar racecar;
   
   //Map collision rectangles (to be removed when list is working)
@@ -80,41 +83,41 @@ class Board {
  
     
 //Right collisions
-       if (collisions.elementAt(0)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(0)['x'] + collisions.elementAt(0)['width'] > racecar.carPositionX &&
-       collisions.elementAt(0)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(0)['height'] + collisions.elementAt(0)['y'] > racecar.carPositionY ||
-       collisions.elementAt(1)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(1)['x'] + collisions.elementAt(1)['width'] > racecar.carPositionX &&
-       collisions.elementAt(1)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(1)['height'] + collisions.elementAt(1)['y'] > racecar.carPositionY ||
-       collisions.elementAt(2)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(2)['x'] + collisions.elementAt(2)['width'] > racecar.carPositionX &&
-       collisions.elementAt(2)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(2)['height'] + collisions.elementAt(2)['y'] > racecar.carPositionY ||
-       collisions.elementAt(3)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(3)['x'] + collisions.elementAt(3)['width'] > racecar.carPositionX &&
-       collisions.elementAt(3)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(3)['height'] + collisions.elementAt(3)['y'] > racecar.carPositionY ||
-       collisions.elementAt(4)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(4)['x'] + collisions.elementAt(4)['width'] > racecar.carPositionX &&
-       collisions.elementAt(4)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(4)['height'] + collisions.elementAt(4)['y'] > racecar.carPositionY ||
-       collisions.elementAt(5)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(5)['x'] + collisions.elementAt(5)['width'] > racecar.carPositionX &&
-       collisions.elementAt(5)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(5)['height'] + collisions.elementAt(5)['y'] > racecar.carPositionY ||
-       collisions.elementAt(6)['x'] <= racecar.carPositionX + racecar.carWidth &&
-       collisions.elementAt(6)['x'] + collisions.elementAt(6)['width'] > racecar.carPositionX &&
-       collisions.elementAt(6)['y'] < racecar.carPositionY + racecar.carHeight &&
-       collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] > racecar.carPositionY ||
-       racecar.carPositionX >= 498) {
-         canMoveRight = false; {racecar.carPositionX -= collisionImpact; 
-         }
-         racecar.draw();
-       } else if (racecar.carPositionX < 498) { 
-         canMoveRight = true; 
-       }
+    if (collisions.elementAt(0)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(0)['x'] + collisions.elementAt(0)['width'] > racecar.carPositionX &&
+    collisions.elementAt(0)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(0)['height'] + collisions.elementAt(0)['y'] > racecar.carPositionY ||
+    collisions.elementAt(1)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(1)['x'] + collisions.elementAt(1)['width'] > racecar.carPositionX &&
+    collisions.elementAt(1)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(1)['height'] + collisions.elementAt(1)['y'] > racecar.carPositionY ||
+    collisions.elementAt(2)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(2)['x'] + collisions.elementAt(2)['width'] > racecar.carPositionX &&
+    collisions.elementAt(2)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(2)['height'] + collisions.elementAt(2)['y'] > racecar.carPositionY ||
+    collisions.elementAt(3)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(3)['x'] + collisions.elementAt(3)['width'] > racecar.carPositionX &&
+    collisions.elementAt(3)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(3)['height'] + collisions.elementAt(3)['y'] > racecar.carPositionY ||
+    collisions.elementAt(4)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(4)['x'] + collisions.elementAt(4)['width'] > racecar.carPositionX &&
+    collisions.elementAt(4)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(4)['height'] + collisions.elementAt(4)['y'] > racecar.carPositionY ||
+    collisions.elementAt(5)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(5)['x'] + collisions.elementAt(5)['width'] > racecar.carPositionX &&
+    collisions.elementAt(5)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(5)['height'] + collisions.elementAt(5)['y'] > racecar.carPositionY ||
+    collisions.elementAt(6)['x'] <= racecar.carPositionX + racecar.carWidth &&
+    collisions.elementAt(6)['x'] + collisions.elementAt(6)['width'] > racecar.carPositionX &&
+    collisions.elementAt(6)['y'] < racecar.carPositionY + racecar.carHeight &&
+    collisions.elementAt(6)['height'] + collisions.elementAt(6)['y'] > racecar.carPositionY ||
+    racecar.carPositionX >= 498) {
+      canMoveRight = false; {racecar.carPositionX -= collisionImpact; 
+    }
+      racecar.draw();
+    } else if (racecar.carPositionX < 498) { 
+      canMoveRight = true; 
+    }
 
        //Left collisions
           if (collisions.elementAt(0)['x'] < racecar.carPositionX + racecar.carWidth &&

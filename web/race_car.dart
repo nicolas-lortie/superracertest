@@ -3,9 +3,11 @@ part of super_racer;
 class RaceCar {
   Board board;
   
+  
+  
   //Car size
-  num carWidth = 10;
-  num carHeight = 10;
+  num carWidth = 20;
+  num carHeight = 20;
   
   //Car's position on the map
   num carPositionX;
@@ -16,15 +18,17 @@ class RaceCar {
   bool leftDown = false;
   bool backDown = false;
   bool frontDown = false;
+ 
+  //Car Images
+  ImageElement up = new ImageElement(src: "/media/up.png");
+  ImageElement upLeft = new ImageElement(src: "/media/leftup.png");
+  ImageElement upRight = new ImageElement(src: "/media/rightup.png");
+  ImageElement down = new ImageElement(src: "/media/down.png");
+  ImageElement downLeft = new ImageElement(src: "/media/leftdown.png");
+  ImageElement downRight = new ImageElement(src: "/media/rightdown.png");
+  ImageElement left = new ImageElement(src: "/media/left.png");
+  ImageElement right = new ImageElement(src: "/media/right.png");
   
-  //Boolean to indicate car collision
-  bool canMoveLeft = false;
-  bool canMoveRight = false;
-  bool canMoveFront = false; 
-  bool canMoveBack = false;
-  
-  //Car Image
-  var img = document.getElementById('luigi');
   
   RaceCar(this.board, this.carPositionX, this.carPositionY) {
     draw();
@@ -35,14 +39,7 @@ class RaceCar {
     document.onKeyUp.listen(_onKeyUp);
   }
   
-  void draw() {
-    board.context.beginPath();
-    board.context.rect(carPositionX, carPositionY, carWidth, carHeight);
-    board.context.closePath();
-    board.context.fill();
-  }
-  
-//Change rightDown, leftDown Bool if matching arrow keys are pressed (NEED TO ADD FRONT AND BACK)
+//Change rightDown, leftDown Bool if matching arrow keys are pressed
   _turnRight(event) {
     if (event.keyCode == 39) {
       rightDown = true;
@@ -107,6 +104,60 @@ class RaceCar {
       frontDown = false;
     }
   }
+  
+  //Draws the car depending on the keys pressed
+  void draw() {
+     if (rightDown && !leftDown && !frontDown && !backDown) {
+       board.context.beginPath();
+       board.context.drawImage(right, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (rightDown && !leftDown && frontDown && !backDown) {
+       board.context.beginPath();
+       board.context.drawImage(upRight, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (rightDown && !leftDown && !frontDown && backDown) {
+       board.context.beginPath();
+       board.context.drawImage(downRight, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (!rightDown && !leftDown && frontDown && !backDown) {
+       board.context.beginPath();
+       board.context.drawImage(up, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (!rightDown && leftDown && frontDown && !backDown) {
+       board.context.beginPath();
+       board.context.drawImage(upLeft, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (!rightDown && leftDown && !frontDown && !backDown) {
+       board.context.beginPath();
+       board.context.drawImage(left, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (!rightDown && leftDown && !frontDown && backDown) {
+       board.context.beginPath();
+       board.context.drawImage(downLeft, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else if (!rightDown && !leftDown && !frontDown && backDown) {
+       board.context.beginPath();
+       board.context.drawImage(down, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     } else {
+       board.context.beginPath();
+       board.context.drawImage(up, carPositionX, carPositionY);
+       board.context.closePath();
+       board.context.fill();
+     }
+   }
+  
+  
+  
+  
 }
  
 
